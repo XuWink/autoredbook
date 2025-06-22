@@ -37,4 +37,11 @@ python main.py -n 2
 
 ![1750598770085](data/README/1750598770085.png)
 
+<<<<<<< HEAD
 https://github.com/user-attachments/assets/cd6ecd3d-cd3e-43ee-bd52-f81839ca6b9e
+=======
+
+<video id="video" controls="" preload="none" poster="封面">
+      <source id="mp4" src="data\README\autoredbook.mp4" type="video/mp4">
+</videos>
+>>>>>>> 821afa8fcfbb7a066fa277c74786ef0e8caaa8c0
