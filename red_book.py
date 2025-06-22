@@ -171,7 +171,7 @@ def start():
     try:
         # 初始化
         init()
-        #   登录
+        # 登录
         login()
         # 上传笔记
         uploadNote()

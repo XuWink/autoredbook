@@ -1,2 +1,3 @@
 selenium~=4.7
 requests
+telethon
