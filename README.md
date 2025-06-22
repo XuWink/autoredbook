@@ -2,9 +2,9 @@
 
 实现每天从telegram爬取图片，然后自动化发布到小红书
 
-* [X] 自动登录小红书
-* [X] 自动上传图文到小红书
-* [X] 从telegram下载图片
+* [X]  自动登录小红书
+* [X]  自动上传图文到小红书
+* [X]  从telegram下载图片
 
 # 使用方法
 
@@ -25,7 +25,6 @@ pip install requirements.txt
 
 还有就是需要申请自己的telegram app_id和api_hash，网上查一下教程即可，不过可能在申请过程中因为网络问题出现错误，这个需要找一个干净的IP。我是找了一个马来西亚的网友帮忙申请的。
 
-
 使用：
 
 ```shell
@@ -35,3 +34,10 @@ python main.py -n 1
 # 从telegram中下载图片
 python main.py -n 2
 ```
+
+![1750598770085](data/README/1750598770085.png)
+
+
+<video id="video" controls="" preload="none" poster="封面">
+      <source id="mp4" src="data\README\autoredbook.mp4" type="video/mp4">
+</videos>
