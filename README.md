@@ -14,6 +14,7 @@
 git clone https://github.com/XuWink/autoredbook.git
 cd autoredbook
 python -m venv venv
+.\venv\Scripts\activate
 pip install requirements.txt
 ```
 
