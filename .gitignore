@@ -194,4 +194,4 @@ cython_debug/
 .cursorindexingignore
 
 my_session.session
-cookies.pkl
+*.pkl

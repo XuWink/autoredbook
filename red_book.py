@@ -21,7 +21,7 @@ from yiyan import fetch_hitokoto, load_random_image, delete_image
 def login():
     # 打开登录页面
     Config.Browser.get("https://www.xiaohongshu.com/explore?language=zh-CN")
-    sleep(5)
+    sleep(Config.SLEEP_TIME)
     
     # 加载已有Cookie（如果存在）
     try:
@@ -34,7 +34,7 @@ def login():
             print("Cookies已加载并应用")
             # 验证是否成功登录（通过检测登录后才有的元素）
             try:
-                WebDriverWait(Config.Browser, 5).until(
+                WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, ".user"))  # 替换为实际登录后存在的元素选择器
                 )
                 print("基于Cookie的自动登录成功")
@@ -48,21 +48,21 @@ def login():
     
     try:
         # 等待手机号输入框加载完成
-        phone_input = WebDriverWait(Config.Browser, 10).until(
+        phone_input = WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "input[placeholder='输入手机号']"))
         )
         phone_input.clear()  # 清空输入框
         phone_input.send_keys(Config.phone)
-        sleep(5)
+        sleep(Config.SLEEP_TIME)
         
         # 点击获取验证码按钮
         phone_input.send_keys(Keys.TAB)
-        verify_btn = WebDriverWait(Config.Browser, 10).until(
+        verify_btn = WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
             EC.element_to_be_clickable((By.XPATH, "//*[@id='app']/div[1]/div/div[1]/div[3]/div[2]/form/label[2]/span"))  # 使用更稳定的XPath
         )
         verify_btn.click()
         print("已发送验证码，请查收")
-        sleep(5)
+        sleep(Config.SLEEP_TIME)
         
         # 输入验证码（添加重试逻辑）
         max_attempts = 3
@@ -77,32 +77,32 @@ def login():
                     return False
         
         # 输入验证码
-        verify_input = WebDriverWait(Config.Browser, 10).until(
+        verify_input = WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "input[placeholder='输入验证码']"))
         )
         verify_input.clear()
         verify_input.send_keys(verify_code)
-        sleep(5)
+        sleep(Config.SLEEP_TIME)
         
         # 点击登录按钮
-        login_button = WebDriverWait(Config.Browser, 10).until(
+        login_button = WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
             EC.element_to_be_clickable((By.XPATH, "//*[@id='app']/div[1]/div/div[1]/div[3]/div[2]/form/button"))  # 使用更稳定的XPath
         )
         login_button.click()
-        sleep(5)
+        sleep(Config.SLEEP_TIME)
 
-        agree_but = WebDriverWait(Config.Browser, 10).until(
+        agree_but = WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
             lambda b: b.find_element(By.XPATH, "//*[@id='app']/div[1]/div/div[2]/div[2]/div[3]/div/div[1]")
         )
         agree_but.click()
-        sleep(5)
+        sleep(Config.SLEEP_TIME)
         
         # 验证登录是否成功（等待登录后才有的元素出现）
-        WebDriverWait(Config.Browser, 15).until(
+        WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, ".user"))  # 替换为实际登录后存在的元素选择器
         )
         print("登录成功")
-        sleep(5)
+        sleep(Config.SLEEP_TIME)
         
         # 保存Cookie
         with open("cookies.pkl", "wb") as file:
@@ -127,31 +127,31 @@ def uploadNote():
 
     try:
         # 点击 上传图文 标签
-        WebDriverWait(Config.Browser, 10, 0.2).until(
+        WebDriverWait(Config.Browser, Config.SLEEP_TIME, 0.2).until(
             lambda x: x.find_element(By.XPATH, "//*[@id='web']/div[1]/div/div/div[1]/div[3]")).click()
     except TimeoutException:
         print("网页好像加载失败了！请重试！")
     
     #  上传图片
-    file_input = WebDriverWait(Config.Browser, 10).until(
+    file_input = WebDriverWait(Config.Browser, Config.SLEEP_TIME).until(
         EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
     )
     file_input.send_keys(Config.PathImage)
-    sleep(5)
+    sleep(Config.SLEEP_TIME)
 
     # 文章标题
     Config.Browser.find_element(By.XPATH, "//*[@id='web']/div[1]/div/div/div/div[1]/div[1]/div[4]/div[1]/div/input").send_keys(Config.title)
-    sleep(3)
+    sleep(Config.SLEEP_TIME)
 
     # 描述
     Config.Browser.find_element(By.XPATH, "//*[@id='quillEditor']/div/p").send_keys(Config.describe)
     print("等待资源上传……")
-    sleep(5)
+    sleep(Config.SLEEP_TIME)
 
     publishBtn = Config.Browser.find_element(By.XPATH, "//*[@id='web']/div[1]/div/div/div/div[2]/div/button[1]/div")
     publishBtn.click()
     print("发布成功！")
-    sleep(5)
+    sleep(Config.SLEEP_TIME)
     Config.Browser.quit()
 
     # 删除图片
