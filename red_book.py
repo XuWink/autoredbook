@@ -8,6 +8,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, WebDriverException
 
+from selenium import webdriver
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
+
 import config as Config
 import pickle
 
@@ -154,8 +158,10 @@ def uploadNote():
     delete_image(Config.PathImage)
 
 def init():
-    # 谷歌浏览器
-    # Config.Browser = webdriver.Chrome()
+    edge_options = Options()
+    # edge_options.add_argument("--headless")  # 无头模式，不打开浏览器窗口
+    service = Service(r"data/msedgedriver.exe")  # 替换为你的 chromedriver 路径
+    Config.Browser = webdriver.Edge(service=service, options=edge_options)
 
     # 获取当前工作目录
     import os
