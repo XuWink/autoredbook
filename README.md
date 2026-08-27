@@ -1,3 +1,5 @@
+
+
 # autoredbook
 
 实现每天从telegram爬取图片，然后自动化发布到小红书
@@ -15,7 +17,7 @@ git clone https://github.com/XuWink/autoredbook.git
 cd autoredbook
 python -m venv venv
 .\venv\Scripts\activate
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 修改配置：
